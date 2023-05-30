@@ -5,6 +5,7 @@ pragma solidity ^0.8.0;
 contract EthBgMessageBoard {
     string private password;
     address private owner;
+    bool solved;
 
     event Hello(address sender, string message);
 
@@ -24,6 +25,7 @@ contract EthBgMessageBoard {
     /// @param _message Message to be sent to all attendees
     function sayHello(string memory _password, string memory _message) public onlyOwner {
         require(keccak256(abi.encode(_password)) == keccak256(abi.encode(password)), "Wrong password.");
+        solved = true;
         emit Hello(msg.sender, _message);
     }
 
@@ -31,6 +33,10 @@ contract EthBgMessageBoard {
     function changeOwner(address _owner) public {
         require(msg.sender == _owner, "Only owner can call this function.");
         owner = _owner;
+    }
+
+    function isSolved() public view returns (bool){
+        return solved;
     }
 
 }

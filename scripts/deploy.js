@@ -20,6 +20,22 @@ async function main() {
   await ownItContract.deployed();
 
   console.log("OwnIt deployed to:", ownItContract.address);
+
+  const LendingProtocol = await ethers.getContractFactory("LendingProtocol");
+  const lendingProtocol = await LendingProtocol.deploy();
+  await lendingProtocol.deployed();
+
+  const LendingProtocolToken = await ethers.getContractFactory("LendingProtocolToken");
+  const lendingProtocolToken = await LendingProtocolToken.deploy(lendingProtocol.address);
+  await lendingProtocolToken.deployed();
+
+  console.log("LendingProtocol deployed to:", lendingProtocol.address);
+
+  const TimeTheTimer = await ethers.getContractFactory("TimeTheTimer");
+  const timeTheTimer = await TimeTheTimer.deploy();
+  await timeTheTimer.deployed();
+
+  console.log("TimeTheTimer deployed to:", timeTheTimer.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

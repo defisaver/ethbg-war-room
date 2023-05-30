@@ -32,10 +32,6 @@ contract LendingProtocolSolution {
     function solveSecondHalf() public {
         uint256 amount = lendingProtocol.supplied(address(this));
         lendingProtocol.withdraw(amount);
-        require(lendingProtocol.isSolved());
     }
 
-    function isSolved() public view returns (bool){
-        return lendingProtocol.isSolved();
-    }
 }

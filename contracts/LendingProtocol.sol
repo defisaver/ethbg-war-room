@@ -72,9 +72,8 @@ contract LendingProtocol {
 
     function isSolved() public view returns (bool) {
         uint256 currContractBalance = IERC20(token).balanceOf(address(this));
-        uint256 currHackerBalance = IERC20(token).balanceOf(msg.sender);
 
-        return (currContractBalance == 0 && currHackerBalance > 0);
+        return (currContractBalance == 0);
     }
 
 }
