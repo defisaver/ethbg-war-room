@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 
+/*
 contract BaseERC20 {
     constructor() public {}
 
@@ -108,3 +109,4 @@ contract ETHBG is BaseERC20 {
 contract TokenVault {
 
 }
+*/
