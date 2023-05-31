@@ -36,6 +36,15 @@ async function main() {
   await timeTheTimer.deployed();
 
   console.log("TimeTheTimer deployed to:", timeTheTimer.address);
+
+  const Implementation = await ethers.getContractFactory("Implementation");
+  const implementationContract = await Implementation.deploy();
+  await implementationContract.deployed();
+  const HoneyProxy = await ethers.getContractFactory("HoneyProxy");
+  const honeyProxyContract = await HoneyProxy.deploy(implementationContract.address, { value: ethers.utils.parseUnits('100')});
+  await honeyProxyContract.deployed();
+
+  console.log("HoneyProxy deployed to:", honeyProxy.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
