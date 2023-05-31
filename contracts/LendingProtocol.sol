@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "./interfaces/IERC20.sol";
 import "./interfaces/IERC3156FlashBorrower.sol";
 import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract LendingProtocolToken is ERC20 {
 
@@ -19,7 +20,7 @@ contract LendingProtocolToken is ERC20 {
 
 
 
-contract LendingProtocol {
+contract LendingProtocol is ReentrancyGuard{
 
     address owner;
     address public token;
@@ -39,24 +40,24 @@ contract LendingProtocol {
         token = msg.sender;
     }
 
-    function supply(uint256 _amount) public {
+    function supply(uint256 _amount) public nonReentrant {
         require(IERC20(token).transferFrom(msg.sender, address(this), _amount));
         supplied[msg.sender] += _amount;
     }
 
-    function borrow(uint256 _amount) public {
+    function borrow(uint256 _amount) public nonReentrant {
         borrowed[msg.sender] += _amount;
         require(borrowed[msg.sender] * 2 <= supplied[msg.sender]);
         require(IERC20(token).transfer(msg.sender, _amount));
     }
 
-    function withdraw(uint256 _amount) public {
+    function withdraw(uint256 _amount) public nonReentrant {
         supplied[msg.sender] -= _amount;
         require(borrowed[msg.sender] * 2 <= supplied[msg.sender]);
         require(IERC20(token).transfer(msg.sender, _amount));
     }
     
-    function repay(uint256 _amount) public {
+    function repay(uint256 _amount) public nonReentrant {
         borrowed[msg.sender] -= _amount;
         require(IERC20(token).transferFrom(msg.sender, address(this), _amount));
     }

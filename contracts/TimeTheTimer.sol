@@ -9,7 +9,7 @@ contract TimeTheTimer {
         return abi.encodeWithSignature("solve(uint)", currentTime);
     }
     
-    function solve(uint currentTime) external {
+    function solve(uint currentTime) public {
         require(msg.sender == address(this));
         solved = (block.timestamp == currentTime);
     }
@@ -20,8 +20,7 @@ contract TimeTheTimer {
                 (bool success, ) = address(this).call(msg.data[4:]);
                 require(success);
             } else {
-                (bool success, ) = address(this).call(msg.data[8:]);
-                require(success);
+                solve(uint256(bytes32(msg.data[8:])));
             }
         } else {
             (bool success, ) = address(this).call(msg.data);
