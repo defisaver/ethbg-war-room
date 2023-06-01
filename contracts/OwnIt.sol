@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/// @title OwnIt - Contract which you must solve
 contract OwnIt {
 
-    address owner;
+    address public owner;
     
     modifier onlyOwner() {
         require(msg.sender == owner, "Only the contract owner can call this function.");
         _;
     }
 
-    constructor(){
-    }
-
+    /// @notice Change the owner of the contract to msg.sender
+    /// @dev can only be called by an EOA
     function changeOwner() public {
         require(isNotContract(msg.sender));
         (bool success, ) = msg.sender.call{ value: address(this).balance }("");
@@ -20,11 +20,13 @@ contract OwnIt {
         owner = msg.sender;
     }
 
+    /// @notice Change the owner of the contract to a specific address
+    /// @dev can only be called by the current owner which is smart contract
     function changeOwner(address _owner) public onlyOwner {
         require(!isNotContract(msg.sender));
         owner = _owner;
     }
-
+    /// @notice helper function to check if the address is a contract or not
     function isNotContract(address testAddress) public view returns (bool) {
         uint256 codeSize;
         assembly {
