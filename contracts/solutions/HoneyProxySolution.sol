@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.7.6;
 
-import "../HoneyProxy.sol";
+import { HoneyProxy, Implementation } from "../HoneyProxy.sol";
+
 
 contract HoneyProxySolution {
     address payable honeyProxyAddress;

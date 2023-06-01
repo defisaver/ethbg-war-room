@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/// @dev To solve this challenge you will need to change the owner of this contract to 0x000000000000000000000000000000000000dEaD
 contract OwnIt {
 
     address owner;

@@ -7,11 +7,8 @@ import { ERC20 } from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract LendingProtocolToken is ERC20 {
+    uint256 constant initialSupply = 1_000_000 ether;
 
-    // Define the supply of FunToken: 1,000,000 
-    uint256 constant initialSupply = 1000000 * (10**18);
-
-    // Constructor will be called on contract creation
     constructor(address lendingProtocolAddress) ERC20("HackMe", "HAX") {
         _mint(lendingProtocolAddress, initialSupply);
         LendingProtocol(lendingProtocolAddress).init();
@@ -19,7 +16,7 @@ contract LendingProtocolToken is ERC20 {
 }
 
 
-
+/// @dev To solve this challenge you will need to drain LendingProtocolToken from this contract
 contract LendingProtocol is ReentrancyGuard{
 
     address owner;

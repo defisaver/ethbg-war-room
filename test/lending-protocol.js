@@ -16,7 +16,7 @@ describe("LendingProtocol", function () {
     const lendingProtocolSolution = await LendingProtocolSolution.deploy(lendingProtocol.address);
     await lendingProtocolSolution.deployed();
 
-    await lendingProtocolSolution.solveFirstHalf();
+    await lendingProtocolSolution.solve();
 
     expect(await lendingProtocol.isSolved()).to.equal(true);
   });

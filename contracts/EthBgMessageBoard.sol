@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 /// @title EthBgMessageBoard - Contract for conference organizers to send announcements to attendees
+/// @dev The challenge is to successfully call the sayHello method on this contract
 contract EthBgMessageBoard {
     string private password;
     address private owner;

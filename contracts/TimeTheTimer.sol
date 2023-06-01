@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.8.10;
 
+/// @dev To solve this challenge you will need to succesfuly call the solve method on this contract
 contract TimeTheTimer {
 
     bool solved;

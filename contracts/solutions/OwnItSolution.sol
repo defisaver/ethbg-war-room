@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
 import "../OwnIt.sol";
 
-pragma solidity ^0.8.0;
 
 contract OwnItSolution {
     OwnIt private ownItContract;

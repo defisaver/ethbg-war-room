@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity =0.7.6;
 
+/// @dev The challenge is to drain all ether from this contract
 contract HoneyProxy {
     address public owner;
     address public implementation;
