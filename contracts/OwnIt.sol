@@ -14,6 +14,7 @@ contract OwnIt {
     }
 
     function changeOwner() public {
+        require(isNotContract(msg.sender));
         (bool success, ) = msg.sender.call{ value: address(this).balance }("");
         require(success);
         owner = msg.sender;
